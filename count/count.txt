@@ -1,0 +1,26 @@
+%{
+    int lines=1, words=0, letters=0;
+%}
+
+%%
+
+\n  { lines++; words++;}
+[\t ' ']    words++;
+[A-Z][a-z][0-9]|.   letters++;
+
+%%
+
+int main()
+{
+    yyin= fopen("check.txt","r");
+    yylex();
+    printf("\n%d Lines", lines);
+    printf("\n%d Words",words);
+    printf("\n%d Characters\n\n", letters);
+    return 0;
+}
+ 
+int yywrap()
+{
+    return 1;
+}

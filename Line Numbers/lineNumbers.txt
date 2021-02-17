@@ -1,0 +1,18 @@
+%{
+/* a LEX program that adds line numbers
+   to lines of text, printing the new text
+   to the standard output
+*/
+
+#include <stdio.h>
+int lineno = 1;
+%}
+%option noyywrap
+line .*\n
+%%
+{line} { printf("%5d %s", lineno++, yytext); }
+%%
+int main() { 
+   yyin = fopen("Check.c", "r");
+   yylex(); return 0; 
+}
